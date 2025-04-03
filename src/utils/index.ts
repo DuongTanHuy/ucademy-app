@@ -16,15 +16,15 @@ const roboto = Roboto({
 const sf_mono = localFont({
   src: [
     {
-      path: "./local-fonts/SFMono-Regular.otf",
+      path: "../local-fonts/SFMono-Regular.otf",
       weight: "400",
     },
     {
-      path: "./local-fonts/SFMono-Medium.otf",
+      path: "../local-fonts/SFMono-Medium.otf",
       weight: "500",
     },
     {
-      path: "./local-fonts/SFMono-Bold.otf",
+      path: "../local-fonts/SFMono-Bold.otf",
       weight: "700",
     },
   ],
