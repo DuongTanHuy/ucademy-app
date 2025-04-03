@@ -10,7 +10,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "#BE3144",
+        primary: "#bc6c25",
+        secondary: "#dda15e",
       },
       fontFamily: {
         manrope: ["var(--font-manrope)"],

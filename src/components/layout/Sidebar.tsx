@@ -6,8 +6,12 @@ export default function Sidebar() {
   return (
     <div className="p-5 border-r border-r-gray-200">
       <a href="/" className="text-3xl inline-block mb-5 font-[500]">
-        <span className="text-primary font-bold">U</span>
-        cademy
+        <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent font-bold">
+          U
+        </span>
+        <span className="bg-gradient-to-r from-secondary to-[#9d8189] bg-clip-text text-transparent">
+          cademy
+        </span>
       </a>
       <ul className="flex flex-col gap-2">
         {MENU_ITEMS.map((item, index) => (
