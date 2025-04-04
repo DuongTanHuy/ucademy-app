@@ -3,10 +3,10 @@ import { CourseItem } from "@/components/course";
 import { Heading } from "@/components/typhography";
 import React from "react";
 
-export default function page() {
+const page = () => {
   return (
     <>
-      <Heading>Khám phá</Heading>
+      <Heading>Khu vực học tập</Heading>
       <CourseGrid>
         <CourseItem />
         <CourseItem />
@@ -15,4 +15,6 @@ export default function page() {
       </CourseGrid>
     </>
   );
-}
+};
+
+export default page;

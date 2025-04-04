@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  scrollbar-color: rgb(156 163 175 / 1) transparent;
+}
+
+@layer base {
+  body {
+    @apply bg-gray-100;
+  }
+}
+
 @layer components {
   .svg-animate {
     stroke-dashoffset: 100;
