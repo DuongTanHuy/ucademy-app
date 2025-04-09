@@ -3,8 +3,9 @@ import { Document, model, models, Schema } from "mongoose";
 
 export interface IUser extends Document {
   clerkId: string;
+  name: string;
   username: string;
-  email_address: string;
+  email: string;
   avatar: string;
   status: UserStatus;
   role: UserRole;
@@ -13,14 +14,15 @@ export interface IUser extends Document {
     courseId: string;
     progress: number;
   }[];
-  createdAt?: Date;
-  updatedAt?: Date;
+  created_at?: Date;
+  updated_at?: Date;
 }
 
 const userSchema = new Schema<IUser>({
   clerkId: { type: String, unique: true },
-  username: { type: String, unique: true },
-  email_address: { type: String, unique: true },
+  name: { type: String },
+  username: { type: String, unique: true, required: true },
+  email: { type: String, unique: true, required: true },
   avatar: { type: String },
   status: {
     type: String,
@@ -41,8 +43,8 @@ const userSchema = new Schema<IUser>({
       },
     ],
   },
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now },
+  created_at: { type: Date, default: Date.now },
+  updated_at: { type: Date, default: Date.now },
 });
 
 const User = models.User || model<IUser>("User", userSchema);
