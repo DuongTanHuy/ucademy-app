@@ -10,4 +10,21 @@ enum UserRole {
   EXPERT = "EXPERT",
 }
 
-export { UserStatus, UserRole };
+enum CourseStatus {
+  APPROVED = "APPROVED",
+  PENDING = "PENDING",
+  REJECTED = "REJECTED",
+}
+
+enum CourseLevel {
+  BEGINNER = "BEGINNER",
+  INTERMEDIATE = "INTERMEDIATE",
+  ADVANCED = "ADVANCED",
+}
+
+enum LessonType {
+  VIDEO = "VIDEO",
+  TEXT = "TEXT",
+}
+
+export { UserStatus, UserRole, CourseStatus, CourseLevel, LessonType };

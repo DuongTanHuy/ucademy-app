@@ -14,3 +14,4 @@ export const createUser = async (user: TCreateUserParams) => {
     throw new Error("Failed to create user");
   }
 };
+

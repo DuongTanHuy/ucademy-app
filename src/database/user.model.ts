@@ -14,8 +14,8 @@ export interface IUser extends Document {
     courseId: string;
     progress: number;
   }[];
-  created_at?: Date;
-  updated_at?: Date;
+  created_at: Date;
+  updated_at: Date;
 }
 
 const userSchema = new Schema<IUser>({
