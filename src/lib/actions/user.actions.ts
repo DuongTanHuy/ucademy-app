@@ -1,9 +1,10 @@
 "use server";
 
-import User, { IUser } from "@/database/user.model";
+import User from "@/database/user.model";
 import { connectDB } from "../mongoose";
+import { TCreateUserParams } from "@/types";
 
-export const createUser = async (user: IUser) => {
+export const createUser = async (user: TCreateUserParams) => {
   try {
     connectDB();
     const newUser = await User.create(user);
