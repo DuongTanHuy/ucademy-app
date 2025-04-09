@@ -1,3 +1,4 @@
+import { ModeToggle } from "@/components/common/ModeToggle";
 import Sidebar from "@/components/layout/Sidebar";
 import {
   SignedIn,
@@ -21,8 +22,9 @@ export default function layout({
           <input
             type="search"
             placeholder="Tìm kiếm..."
-            className="w-[300px] border outline-none border-gray-300 rounded-lg py-2 px-4 focus:border-primary text-sm mr-auto"
+            className="w-[300px] border outline-none border-gray-300 dark:border-opacity-10 rounded-lg py-2 px-4 focus:!border-primary text-sm mr-auto"
           />
+          <ModeToggle />
           <SignedOut>
             <SignInButton mode="modal">
               <button className="group relative bg-primary hover:bg-opacity-80 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 min-w-fit overflow-hidden">
@@ -31,7 +33,7 @@ export default function layout({
               </button>
             </SignInButton>
             <SignUpButton mode="modal">
-              <button className="group relative bg-white hover:bg-opacity-80 text-primary font-semibold py-2 px-4 rounded-lg border border-primary transition duration-200 min-w-fit overflow-hidden">
+              <button className="group relative bg-white dark:bg-opacity-0 hover:bg-opacity-80 text-primary font-semibold py-2 px-4 rounded-lg border border-primary transition duration-200 min-w-fit overflow-hidden">
                 <span className="relative z-10">Sign Up</span>
                 <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full group-hover:duration-[850ms] duration-[850ms] ease-in-out transition-transform bg-gradient-to-r from-transparent via-primary/10 to-transparent"></div>
               </button>

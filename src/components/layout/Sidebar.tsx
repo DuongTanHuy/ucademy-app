@@ -4,7 +4,7 @@ import { ActiveLink } from "../common";
 
 export default function Sidebar() {
   return (
-    <div className="bg-white p-5 border-r border-r-gray-200">
+    <div className="bg-white p-5 border-r border-r-gray-200 dark:border-opacity-10 dark:bg-grayDarker">
       <a href="/" className="text-3xl inline-block mb-5 font-[500]">
         <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent font-bold">
           U

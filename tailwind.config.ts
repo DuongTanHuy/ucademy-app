@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: ["class"],
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -12,6 +13,9 @@ const config: Config = {
       colors: {
         primary: "#bc6c25",
         secondary: "#dda15e",
+        grayDarkest: "#131316",
+        grayDarker: "#212126",
+        grayDark: "#9394a1",
       },
       fontFamily: {
         manrope: ["var(--font-manrope)"],

@@ -1,4 +1,4 @@
-import { TMenuItem } from "@/app/types";
+import { TMenuItem } from "@/types";
 import {
   IconExplore,
   IconPlay,

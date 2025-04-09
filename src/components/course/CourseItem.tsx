@@ -5,7 +5,7 @@ import { IconEye, IconStar } from "../icons";
 
 const CourseItem = () => {
   return (
-    <div className="bg-white border border-gray-200 p-4 rounded-2xl">
+    <div className="bg-white dark:bg-grayDarker dark:border-opacity-10 border border-gray-200 p-4 rounded-2xl">
       <Link
         href="#"
         className="group block h-[180px] relative overflow-hidden rounded-lg"
@@ -19,12 +19,12 @@ const CourseItem = () => {
           sizes="@media (max-width: 640px) 300px, 100vw"
           priority
         />
-        <span className="absolute top-2 right-2 bg-white rounded-full px-3 py-1 text-xs font-medium text-gray-700">
+        <span className="absolute top-2 right-2 bg-white dark:bg-grayDarker rounded-full px-3 py-1 text-xs font-bold text-gray-700 dark:text-gray-300">
           New
         </span>
       </Link>
 
-      <h3 className="text-lg font-bold text-gray-600 mt-2">
+      <h3 className="text-lg font-bold text-gray-600 dark:text-gray-300 mt-2">
         Khóa học NextJs Pro - Xây dựng E-Learning system hoàn chỉnh
       </h3>
 
@@ -39,13 +39,13 @@ const CourseItem = () => {
 
       <div className="h-[1px] bg-gradient-to-r from-transparent via-black/40 to-transparent mt-4" />
 
-      <div className="flex items-center gap-4 mt-2 text-gray-400 font-medium">
+      <div className="flex items-center gap-4 mt-2 text-gray-500 dark:text-grayDark font-medium">
         <div className="flex items-center gap-2">
           <IconEye className="size-5" />
           1000
         </div>
         <div className="flex items-center gap-2">
-          <IconStar className="size-5 text-yellow-400" />
+          <IconStar className="size-5 text-yellow-400 dark:text-yellow-600" />
           5.0
         </div>
       </div>
