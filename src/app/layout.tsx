@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { manrope, roboto, sf_mono } from "@/utils";
 import "./globals.css";
 import { ThemeProvider } from "@/components/common/theme-provider";
+import { ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
   title: "Ucademy",
@@ -27,6 +28,13 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             {children}
+            <ToastContainer
+              autoClose={2000}
+              hideProgressBar
+              pauseOnHover
+              toastClassName="text-sm font-medium p-1 !min-h-10 p-[12px] dark:bg-grayDarker dark:text-gray-300"
+              position="top-right"
+            />
           </ThemeProvider>
         </body>
       </html>

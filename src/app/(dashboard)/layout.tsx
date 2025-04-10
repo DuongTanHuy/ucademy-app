@@ -40,7 +40,13 @@ export default function layout({
             </SignUpButton>
           </SignedOut>
           <SignedIn>
-            <UserButton />
+            <UserButton
+              appearance={{
+                elements: {
+                  avatarBox: "w-[40px] h-[40px]",
+                },
+              }}
+            />
           </SignedIn>
         </header>
         <div className="h-[calc(100vh-73.33px)] overflow-y-auto px-4">
