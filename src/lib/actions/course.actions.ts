@@ -2,7 +2,7 @@
 
 import { connectDB } from "../mongoose";
 import { TCreateCourseParams, TUpdateCourseParams } from "@/types";
-import Course from "@/database/course.model";
+import Course, { ICourse } from "@/database/course.model";
 import { revalidatePath } from "next/cache";
 
 export const getCourses = async () => {
@@ -49,6 +49,9 @@ export const updateCourse = async (
     if (existingCourse) {
       throw new Error("Slug đã tồn tại");
     }
+
+    console.log(course.updateData);
+
     const updatedCourse = await Course.findByIdAndUpdate(
       courseId,
       course.updateData,
@@ -64,7 +67,9 @@ export const updateCourse = async (
   }
 };
 
-export const getCourseBySlug = async (slug: string) => {
+export const getCourseBySlug = async (
+  slug: string
+): Promise<ICourse | null> => {
   try {
     connectDB();
     const course = await Course.findOne({ slug });

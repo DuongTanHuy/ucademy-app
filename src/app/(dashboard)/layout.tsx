@@ -15,7 +15,7 @@ export default function layout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="wrapper grid grid-cols-[300px,minmax(0,1fr)] h-screen">
+    <div className="wrapper grid lg:grid-cols-[300px,minmax(0,1fr)] h-screen">
       <Sidebar />
       <main className="max-h-screen py-4">
         <header className="flex items-center gap-4 mb-4 px-4">

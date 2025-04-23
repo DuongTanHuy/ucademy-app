@@ -43,7 +43,11 @@ const courseSchema = new Schema<ICourse>({
     default: CourseStatus.PENDING,
   },
   author: { type: Schema.Types.ObjectId, ref: "User" },
-  level: { type: String, enum: Object.values(CourseLevel) },
+  level: {
+    type: String,
+    enum: Object.values(CourseLevel),
+    default: CourseLevel.BEGINNER,
+  },
   views: { type: Number, default: 0 },
   rating: { type: [Number], default: [5] },
   info: {

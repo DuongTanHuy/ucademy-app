@@ -8,6 +8,8 @@ import IconOrder from "./IconOrder";
 import IconLeft from "./IconLeft";
 import IconStar from "./IconStar";
 import IconEye from "./IconEye";
+import IconAdd from "./IconAdd";
+import IconDelete from "./IconDelete";
 
 export {
   IconPlay,
@@ -20,4 +22,6 @@ export {
   IconLeft,
   IconStar,
   IconEye,
+  IconAdd,
+  IconDelete,
 };
