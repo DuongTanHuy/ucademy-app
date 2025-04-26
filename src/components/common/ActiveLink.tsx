@@ -14,11 +14,11 @@ export default function ActiveLink({ href, children }: TActiveLinkProps) {
       replace
       scroll={false}
       className={`
-        p-3 rounded-md flex items-center gap-3 transition-all
-        dark:text-grayDark
+        py-1 px-2 lg:p-3 rounded-md flex flex-col whitespace-nowrap lg:flex-row items-center gap-1 lg:gap-3 transition-all
+        dark:text-grayDark text-xs lg:w-full lg:text-base
         ${
           isActive
-            ? "bg-primary svg-animate !text-white"
+            ? "bg-primary svg-animate !text-white font-semibold"
             : "hover:!text-primary hover:bg-primary/10"
         }
       `}

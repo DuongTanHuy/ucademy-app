@@ -1,7 +1,7 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { manrope, roboto, sf_mono } from "@/utils";
-import "./globals.css";
+import "./globals.scss";
 import { ThemeProvider } from "@/components/common/theme-provider";
 import { ToastContainer } from "react-toastify";
 

@@ -4,8 +4,9 @@ import { connectDB } from "../mongoose";
 import { TCreateCourseParams, TUpdateCourseParams } from "@/types";
 import Course, { ICourse } from "@/database/course.model";
 import { revalidatePath } from "next/cache";
+import { CourseStatus } from "@/types/enums";
 
-export const getCourses = async () => {
+export const getCourses = async (): Promise<ICourse[] | []> => {
   try {
     connectDB();
     const courses = await Course.find();
@@ -50,8 +51,6 @@ export const updateCourse = async (
       throw new Error("Slug đã tồn tại");
     }
 
-    console.log(course.updateData);
-
     const updatedCourse = await Course.findByIdAndUpdate(
       courseId,
       course.updateData,
@@ -77,5 +76,49 @@ export const getCourseBySlug = async (
   } catch (error) {
     console.log(error);
     throw new Error("Failed to get course");
+  }
+};
+
+export const updateCourseStatus = async (
+  courseId: string,
+  path: string = "/",
+  status: string = CourseStatus.REJECTED,
+  _destroy: boolean = false
+) => {
+  try {
+    connectDB();
+    const findCourse = await Course.findById(courseId);
+    if (!findCourse) {
+      throw new Error("Khóa học không tồn tại");
+    }
+
+    await Course.findByIdAndUpdate(
+      courseId,
+      {
+        status,
+        ...(status === CourseStatus.REJECTED
+          ? { _destroy: true }
+          : {
+              _destroy,
+            }),
+      },
+      {
+        new: true,
+      }
+    );
+    revalidatePath(path);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export const deleteCourse = async (courseId: string) => {
+  try {
+    connectDB();
+    await Course.deleteOne({ _id: courseId });
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to delete course");
   }
 };

@@ -1,6 +1,5 @@
-import { CourseGrid } from "@/components/common";
+import { CourseGrid, Heading } from "@/components/common";
 import { CourseItem } from "@/components/course";
-import { Heading } from "@/components/typhography";
 import React from "react";
 
 const page = () => {

@@ -6,18 +6,29 @@ import {
   IconOrder,
   IconPlay,
 } from "@/components/icons";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { ECourseLevel, courseLevel } from "@/constants";
 import { getCourseBySlug } from "@/lib/actions/course.actions";
-import { CourseStatus } from "@/types/enums";
+import { getUserInfo } from "@/lib/actions/user.actions";
+import { cn } from "@/lib/utils";
+import { CourseStatus, UserRole } from "@/types/enums";
+import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
 import React from "react";
 
 const page = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
+  const { userId }: { userId: string | null } = await auth();
   const data = await getCourseBySlug(slug);
+  const user = await getUserInfo(userId);
 
-  if (data?.status !== CourseStatus.APPROVED) {
+  if (user?.role !== UserRole.ADMIN && data?.status !== CourseStatus.APPROVED) {
     return <PageNotFound />;
   }
 
@@ -56,7 +67,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
         </BoxSection>
 
         <BoxSection title="Thông tin">
-          <div className="grid grid-cols-4 gap-5">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
             <BoxInfo title="Bài học" value="100" />
             <BoxInfo title="Lượt xem" value="1000" />
             <BoxInfo
@@ -86,16 +97,18 @@ const page = async ({ params }: { params: { slug: string } }) => {
         <BoxSection title="Q&A">
           <div className="leading-normal">
             {data?.info?.qa.map((q, index) => (
-              <div key={index} className="mb-2">
-                <strong>{`${q.question}?`}</strong>
-                <p>{q.answer}</p>
-              </div>
+              <Accordion key={index} type="single" collapsible>
+                <AccordionItem value={q.question}>
+                  <AccordionTrigger>{q.question}?</AccordionTrigger>
+                  <AccordionContent>{q.answer}</AccordionContent>
+                </AccordionItem>
+              </Accordion>
             ))}
           </div>
         </BoxSection>
       </div>
       <div>
-        <div className="bg-white rounded-lg p-5">
+        <div className="bgDarkMode rounded-lg p-5">
           <div className="flex items-center gap-2 mb-3">
             <strong className="text-primary text-xl font-bold">{`${new Intl.NumberFormat(
               "vi-VN",
@@ -146,7 +159,7 @@ export default page;
 
 function BoxInfo({ title, value }: { title: string; value: string }) {
   return (
-    <div className="bg-white rounded-lg p-5">
+    <div className="bgDarkMode rounded-lg p-5">
       <h4 className="text-sm text-slate-400 font-normal">{title}</h4>
       <h3 className="font-bold">{value}</h3>
     </div>
@@ -156,18 +169,15 @@ function BoxInfo({ title, value }: { title: string; value: string }) {
 function BoxSection({
   title,
   children,
+  className,
 }: {
   title: string;
   children: React.ReactNode;
+  className?: string;
 }) {
   return (
     <>
-      <h2
-        className="font-bold text-xl
-        mb-5"
-      >
-        {title}
-      </h2>
+      <h2 className={cn("font-bold text-xl mb-5", className)}>{title}</h2>
       <div className="mb-10">{children}</div>
     </>
   );

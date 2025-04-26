@@ -1,10 +1,11 @@
 import React from "react";
 import { MENU_ITEMS } from "@/constants";
 import { ActiveLink } from "../common";
+import { IconMenu } from "../icons";
 
 export default function Sidebar() {
   return (
-    <div className="bg-white p-5 border-r border-r-gray-200 dark:border-opacity-10 dark:bg-grayDarker hidden lg:flex flex-col">
+    <div className="bgDarkMode borderDarkMode p-5 border-r hidden lg:flex flex-col">
       <a href="/" className="text-3xl inline-block mb-5 font-[500]">
         <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent font-bold">
           U
@@ -22,14 +23,14 @@ export default function Sidebar() {
   );
 }
 
-function MenuItem({
+export function MenuItem({
   href,
   children,
   icon,
 }: {
   href: string;
   icon?: React.ReactNode;
-  children: string | React.ReactNode;
+  children?: string | React.ReactNode;
 }) {
   return (
     <li>

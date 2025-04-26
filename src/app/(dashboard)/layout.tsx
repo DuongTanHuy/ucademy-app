@@ -1,5 +1,6 @@
 import { ModeToggle } from "@/components/common/ModeToggle";
-import Sidebar from "@/components/layout/Sidebar";
+import Sidebar, { MenuItem } from "@/components/layout/Sidebar";
+import { MENU_ITEMS } from "@/constants";
 import {
   SignedIn,
   SignedOut,
@@ -17,7 +18,12 @@ export default function layout({
   return (
     <div className="wrapper grid lg:grid-cols-[300px,minmax(0,1fr)] h-screen">
       <Sidebar />
-      <main className="max-h-screen py-4">
+      <ul className="flex lg:hidden flex-row gap-2 fixed bottom-4 left-1/2 -translate-x-1/2 rounded-lg bgDarkMode p-2 z-20 shadow-lg">
+        {MENU_ITEMS.map((item, index) => (
+          <MenuItem key={index} {...item} />
+        ))}
+      </ul>
+      <main className="max-h-screen py-4 overflow-hidden">
         <header className="flex items-center gap-4 mb-4 px-4">
           <input
             type="search"
@@ -49,7 +55,7 @@ export default function layout({
             />
           </SignedIn>
         </header>
-        <div className="h-[calc(100vh-73.33px)] overflow-y-auto px-4">
+        <div className="pb-[80px] lg:pb-0 h-[calc(100vh-73.33px)] overflow-y-auto px-4">
           {children}
         </div>
       </main>

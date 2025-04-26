@@ -32,6 +32,7 @@ import { IconAdd, IconDelete } from "../icons";
 import { ECourseLevel, ECourseStatus } from "@/constants";
 import { UploadButton } from "@/utils/uploadthing";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   title: z
@@ -70,6 +71,7 @@ const formSchema = z.object({
 });
 
 const CourseUpdate = ({ course }: { course: ICourse }) => {
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -177,6 +179,10 @@ const CourseUpdate = ({ course }: { course: ICourse }) => {
           ],
         },
       });
+
+      if (slug !== course.slug) {
+        router.push(`/manage/course/update?slug=${payload.slug}`);
+      }
 
       toast.success("Khóa học đã được cập nhật");
     } catch (error) {
@@ -517,7 +523,7 @@ const CourseUpdate = ({ course }: { course: ICourse }) => {
                   </button>
                 </FormLabel>
                 {(field.value ?? []).map((item, index) => (
-                  <div key={index} className="grid grid-cols-2 gap-2">
+                  <div key={index} className="grid md:grid-cols-2 gap-2">
                     <Input
                       placeholder={`Câu hỏi ${index + 1}`}
                       {...field}

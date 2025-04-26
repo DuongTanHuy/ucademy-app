@@ -10,6 +10,9 @@ import IconStar from "./IconStar";
 import IconEye from "./IconEye";
 import IconAdd from "./IconAdd";
 import IconDelete from "./IconDelete";
+import IconEdit from "./IconEdit";
+import IconRight from "./IconRight";
+import IconMenu from "./IconMenu";
 
 export {
   IconPlay,
@@ -24,4 +27,7 @@ export {
   IconEye,
   IconAdd,
   IconDelete,
+  IconEdit,
+  IconRight,
+  IconMenu,
 };
