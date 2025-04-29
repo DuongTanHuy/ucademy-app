@@ -105,6 +105,8 @@ export const courseLevel: Record<CourseLevel, string> = {
 
 export const commonClassNames = {
   status: "rounded-md px-3 py-1 font-semibold text-xs font",
+  action:
+    "size-8 rounded-md border flex items-center justify-center p-2  text-gray-500 hover:border-opacity-80 dark:bg-transparent borderDarkMode dark:hover:border-opacity-20",
   pagination:
     "size-10 rounded-md borderDarkMode bgDarkMode border flex items-center justify-center p-2 hover:border-primary hover:text-primary transition-all",
 };

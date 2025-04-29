@@ -13,6 +13,8 @@ import IconDelete from "./IconDelete";
 import IconEdit from "./IconEdit";
 import IconRight from "./IconRight";
 import IconMenu from "./IconMenu";
+import IconCheck from "./IconCheck";
+import IconUnCheck from "./IconUnCheck";
 
 export {
   IconPlay,
@@ -30,4 +32,6 @@ export {
   IconEdit,
   IconRight,
   IconMenu,
+  IconCheck,
+  IconUnCheck,
 };

@@ -133,19 +133,19 @@ const CourseManage = ({ courses }: { courses: ICourse[] }) => {
                 <div className="flex justify-center gap-3">
                   <Link
                     href={`/course/${course.slug}`}
-                    className="size-8 rounded-md border borderDarkMode dark:border-opacity-10 flex items-center p-2 bg-gray-100 dark:bg-grayDarker hover:bg-white dark:hover:bg-grayDark transition-all text-current"
+                    className={commonClassNames.action}
                   >
                     <IconEye className="size-5" />
                   </Link>
                   <Link
                     href={`/manage/course/update?slug=${course.slug}`}
-                    className="size-8 rounded-md border borderDarkMode dark:border-opacity-10 flex items-center p-2 bg-gray-100 dark:bg-grayDarker hover:bg-white dark:hover:bg-grayDark transition-all text-current"
+                    className={commonClassNames.action}
                   >
                     <IconEdit className="size-5" />
                   </Link>
                   <Link
                     href={`/manage/course/update-content?slug=${course.slug}`}
-                    className="size-8 rounded-md border borderDarkMode dark:border-opacity-10 flex items-center p-2 bg-gray-100 dark:bg-grayDarker hover:bg-white dark:hover:bg-grayDark transition-all text-current"
+                    className={commonClassNames.action}
                   >
                     <IconExplore className="size-5" />
                   </Link>
@@ -153,7 +153,7 @@ const CourseManage = ({ courses }: { courses: ICourse[] }) => {
                     onClick={() => {
                       handleDelete(course._id);
                     }}
-                    className="size-8 rounded-md border borderDarkMode dark:border-opacity-10 flex items-center p-2 bg-gray-100 dark:bg-grayDarker hover:bg-white dark:hover:bg-grayDark transition-all text-red-500"
+                    className={cn(commonClassNames.action, "text-red-500")}
                   >
                     <IconDelete className="size-5" />
                   </button>

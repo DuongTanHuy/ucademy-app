@@ -5,6 +5,7 @@ import { TCreateCourseParams, TUpdateCourseParams } from "@/types";
 import Course, { ICourse } from "@/database/course.model";
 import { revalidatePath } from "next/cache";
 import { CourseStatus } from "@/types/enums";
+import Lecture from "@/database/lecture.model";
 
 export const getCourses = async (): Promise<ICourse[] | []> => {
   try {
@@ -71,7 +72,11 @@ export const getCourseBySlug = async (
 ): Promise<ICourse | null> => {
   try {
     connectDB();
-    const course = await Course.findOne({ slug });
+    const course = await Course.findOne({ slug }).populate({
+      path: "lectures",
+      model: Lecture,
+      select: "_id title _destroy",
+    });
     return JSON.parse(JSON.stringify(course));
   } catch (error) {
     console.log(error);

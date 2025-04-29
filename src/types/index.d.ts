@@ -32,10 +32,34 @@ type TUpdateCourseParams = {
   updateData: Partial<ICourse>;
 };
 
+type TCreateLecture = {
+  title?: string;
+  order?: number;
+  course: string;
+  path?: string;
+};
+
+type TUpdateLecture = {
+  lectureId: string;
+  updateData: {
+    title?: string;
+    order?: number;
+    _destroy?: boolean;
+  };
+  path?: string;
+};
+
+interface ICourseUpdatePrams extends Omit<ICourse, "lectures"> {
+  lectures: ILecture[];
+}
+
 export {
   TActiveLinkProps,
   TMenuItem,
   TCreateUserParams,
   TCreateCourseParams,
   TUpdateCourseParams,
+  TCreateLecture,
+  TUpdateLecture,
+  ICourseUpdatePrams,
 };

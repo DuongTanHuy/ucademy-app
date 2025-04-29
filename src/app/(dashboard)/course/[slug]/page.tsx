@@ -14,9 +14,11 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { ECourseLevel, courseLevel } from "@/constants";
+import { ILecture } from "@/database/lecture.model";
 import { getCourseBySlug } from "@/lib/actions/course.actions";
 import { getUserInfo } from "@/lib/actions/user.actions";
 import { cn } from "@/lib/utils";
+import { ICourseUpdatePrams } from "@/types";
 import { CourseStatus, UserRole } from "@/types/enums";
 import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
@@ -25,7 +27,8 @@ import React from "react";
 const page = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
   const { userId }: { userId: string | null } = await auth();
-  const data = await getCourseBySlug(slug);
+  const data = (await getCourseBySlug(slug)) as ICourseUpdatePrams;
+  const lectures = data?.lectures || [];
   const user = await getUserInfo(userId);
 
   if (user?.role !== UserRole.ADMIN && data?.status !== CourseStatus.APPROVED) {
@@ -66,16 +69,26 @@ const page = async ({ params }: { params: { slug: string } }) => {
           <div className="leading-normal">{data?.desc}</div>
         </BoxSection>
 
-        <BoxSection title="Thông tin">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-            <BoxInfo title="Bài học" value="100" />
-            <BoxInfo title="Lượt xem" value="1000" />
-            <BoxInfo
-              title="Trình độ"
-              value={data?.level ? courseLevel[data.level] : "N/A"}
-            />
-            <BoxInfo title="Thời lượng" value="40h" />
-          </div>
+        <BoxSection title="Nội dung khóa học">
+          {lectures
+            .filter((item: ILecture) => !item._destroy)
+            .map((item: ILecture, index: number) => (
+              <Accordion
+                key={index}
+                type="single"
+                collapsible
+                className="w-full"
+              >
+                <AccordionItem value="item-1">
+                  <AccordionTrigger>
+                    <div>{`Chương ${index + 1}: ${item.title}`}</div>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    Yes. It adheres to the WAI-ARIA design pattern.
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            ))}
         </BoxSection>
 
         <BoxSection title="Yêu cầu">
