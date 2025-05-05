@@ -28,7 +28,7 @@ export default function layout({
           <input
             type="search"
             placeholder="Tìm kiếm..."
-            className="w-[300px] border outline-none border-gray-300 dark:border-opacity-10 rounded-lg py-2 px-4 focus:!border-primary text-sm mr-auto"
+            className="w-[300px] border borderDarkMode bgDarkMode outline-none rounded-lg py-2 px-4 focus:!border-primary text-sm mr-auto"
           />
           <ModeToggle />
           <SignedOut>

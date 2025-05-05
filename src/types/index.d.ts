@@ -1,4 +1,5 @@
 import { ICourse } from "@/database/course.model";
+import { ILesson } from "@/database/lesson.model";
 
 type TActiveLinkProps = {
   href: string;
@@ -49,9 +50,40 @@ type TUpdateLecture = {
   path?: string;
 };
 
-interface ICourseUpdatePrams extends Omit<ICourse, "lectures"> {
-  lectures: ILecture[];
+type TUpdateLesson = {
+  lessonId: string;
+  lectureId: string;
+  updateData: {
+    title?: string;
+    slug?: string;
+    video_url?: string;
+    content?: string;
+    duration?: number;
+    _destroy?: boolean;
+  };
+  path?: string;
+};
+
+interface ICourseUpdateLecture extends Omit<ILecture, "lessons"> {
+  lessons: ILesson[];
 }
+
+interface ICourseUpdatePrams extends Omit<ICourse, "lectures"> {
+  lectures: ICourseUpdateLecture[];
+}
+
+interface ILectureUpdateParams extends Omit<ILecture, "lessons"> {
+  lessons: ILesson[];
+}
+
+type TCreateLesson = {
+  lecture: string;
+  course: string;
+  title: string;
+  order?: number;
+  path?: string;
+  slug?: string;
+};
 
 export {
   TActiveLinkProps,
@@ -61,5 +93,8 @@ export {
   TUpdateCourseParams,
   TCreateLecture,
   TUpdateLecture,
+  TUpdateLesson,
   ICourseUpdatePrams,
+  ILectureUpdateParams,
+  TCreateLesson,
 };

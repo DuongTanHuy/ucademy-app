@@ -21,7 +21,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import slugify from "slugify";
 import { toast } from "react-toastify";
 import { ICourse } from "@/database/course.model";

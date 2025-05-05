@@ -1,11 +1,16 @@
 "use server";
 
 import { connectDB } from "../mongoose";
-import { TCreateCourseParams, TUpdateCourseParams } from "@/types";
+import {
+  ICourseUpdatePrams,
+  TCreateCourseParams,
+  TUpdateCourseParams,
+} from "@/types";
 import Course, { ICourse } from "@/database/course.model";
 import { revalidatePath } from "next/cache";
 import { CourseStatus } from "@/types/enums";
 import Lecture from "@/database/lecture.model";
+import Lesson from "@/database/lesson.model";
 
 export const getCourses = async (): Promise<ICourse[] | []> => {
   try {
@@ -69,13 +74,22 @@ export const updateCourse = async (
 
 export const getCourseBySlug = async (
   slug: string
-): Promise<ICourse | null> => {
+): Promise<ICourseUpdatePrams | null> => {
   try {
     connectDB();
     const course = await Course.findOne({ slug }).populate({
       path: "lectures",
       model: Lecture,
       select: "_id title _destroy",
+      match: { _destroy: false },
+      populate: {
+        path: "lessons",
+        model: Lesson,
+        // select: "_id title _destroy",
+        match: {
+          _destroy: false,
+        },
+      },
     });
     return JSON.parse(JSON.stringify(course));
   } catch (error) {

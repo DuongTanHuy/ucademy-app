@@ -1,6 +1,5 @@
 import PageNotFound from "@/app/not-found";
 import {
-  IconCategory,
   IconCourse,
   IconMember,
   IconOrder,
@@ -13,12 +12,10 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { ECourseLevel, courseLevel } from "@/constants";
-import { ILecture } from "@/database/lecture.model";
 import { getCourseBySlug } from "@/lib/actions/course.actions";
 import { getUserInfo } from "@/lib/actions/user.actions";
 import { cn } from "@/lib/utils";
-import { ICourseUpdatePrams } from "@/types";
+import { ICourseUpdatePrams, ILectureUpdateParams } from "@/types";
 import { CourseStatus, UserRole } from "@/types/enums";
 import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
@@ -70,25 +67,18 @@ const page = async ({ params }: { params: { slug: string } }) => {
         </BoxSection>
 
         <BoxSection title="Nội dung khóa học">
-          {lectures
-            .filter((item: ILecture) => !item._destroy)
-            .map((item: ILecture, index: number) => (
-              <Accordion
-                key={index}
-                type="single"
-                collapsible
-                className="w-full"
-              >
-                <AccordionItem value="item-1">
-                  <AccordionTrigger>
-                    <div>{`Chương ${index + 1}: ${item.title}`}</div>
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    Yes. It adheres to the WAI-ARIA design pattern.
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            ))}
+          {lectures.map((item: ILectureUpdateParams, index: number) => (
+            <Accordion key={index} type="single" collapsible className="w-full">
+              <AccordionItem value="item-1">
+                <AccordionTrigger>
+                  <div>{`Chương ${index + 1}: ${item.title}`}</div>
+                </AccordionTrigger>
+                <AccordionContent>
+                  Yes. It adheres to the WAI-ARIA design pattern.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          ))}
         </BoxSection>
 
         <BoxSection title="Yêu cầu">
