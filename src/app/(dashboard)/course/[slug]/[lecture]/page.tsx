@@ -1,4 +1,4 @@
-import { IconLeft, IconRight } from "@/components/icons";
+import { IconLeft, IconPlayLesson, IconRight } from "@/components/icons";
 import LessonItem from "@/components/lesson/LessonItem";
 import {
   Accordion,
@@ -47,20 +47,42 @@ const page = async ({
     return notFound();
   }
 
-  const prevLessonData = lectureData.lessons.find(
+  let prevLessonData = lectureData.lessons.find(
     (less) => less.order === lessonData.order - 1
   );
 
-  const nextLessonData = lectureData.lessons.find(
+  if (!prevLessonData) {
+    if (lectureData.order !== 1) {
+      const prevLectureData = course.lectures.find(
+        (lec) => lec.order === lectureData.order - 1
+      );
+      if (prevLectureData) {
+        prevLessonData = prevLectureData.lessons.at(-1);
+      }
+    }
+  }
+
+  let nextLessonData = lectureData.lessons.find(
     (less) => less.order === lessonData.order + 1
   );
 
+  if (!nextLessonData) {
+    if (lectureData.order !== course.lectures.length) {
+      const nextLectureData = course.lectures.find(
+        (lec) => lec.order === lectureData.order + 1
+      );
+      if (nextLectureData) {
+        nextLessonData = nextLectureData.lessons[0];
+      }
+    }
+  }
+
   return (
-    <div className="grid lg:grid-cols-[2fr,1fr] gap-10 min-h-screen">
+    <div className="lg:grid lg:grid-cols-[2fr,1fr] gap-10 min-h-screen">
       <div>
         <div className="relative aspect-video mb-5 group">
           <iframe
-            src={`https://www.youtube.com/embed/${lessonData.video_url
+            src={`https://www.youtube.com/embed/${(lessonData.video_url || "")
               .split("/")
               .pop()}`}
             title={lessonData.title}
@@ -74,20 +96,32 @@ const page = async ({
             <Link
               href={
                 prevLessonData
-                  ? `/course/${course.slug}/${lecture}?slug=${prevLessonData.slug}`
+                  ? `/course/${course.slug}/${
+                      prevLessonData.lecture || lecture
+                    }?slug=${prevLessonData.slug}`
                   : "#"
               }
-              className={`${commonClassNames.pagination} border-none hover:bg-primary hover:text-white`}
+              className={`${
+                commonClassNames.pagination
+              } border-none hover:bg-primary hover:text-white ${
+                prevLessonData ? "" : "pointer-events-none opacity-50"
+              }`}
             >
               <IconLeft />
             </Link>
             <Link
               href={
                 nextLessonData
-                  ? `/course/${course.slug}/${lecture}?slug=${nextLessonData.slug}`
+                  ? `/course/${course.slug}/${
+                      nextLessonData.lecture || lecture
+                    }?slug=${nextLessonData.slug}`
                   : "#"
               }
-              className={`${commonClassNames.pagination} border-none hover:bg-primary hover:text-white`}
+              className={`${
+                commonClassNames.pagination
+              } border-none hover:bg-primary hover:text-white ${
+                nextLessonData ? "" : "pointer-events-none opacity-50"
+              }`}
             >
               <IconRight />
             </Link>
@@ -97,8 +131,14 @@ const page = async ({
 
       <div>
         {course.lectures.map((item: ILectureUpdateParams, index: number) => (
-          <Accordion key={index} type="single" collapsible className="w-full">
-            <AccordionItem value="item-1">
+          <Accordion
+            key={index}
+            type="single"
+            collapsible
+            className="w-full"
+            defaultValue={lecture}
+          >
+            <AccordionItem value={item._id.toString()}>
               <AccordionTrigger>
                 <div>{`Chương ${index + 1}: ${item.title}`}</div>
               </AccordionTrigger>
@@ -111,6 +151,8 @@ const page = async ({
                     lessonSlug={lesson.slug}
                     lessonDuration={lesson.duration}
                     lessonTitle={lesson.title}
+                    active={lesson.slug === lessonSlug}
+                    icon={<IconPlayLesson className="size-5" />}
                   />
                 ))
               ) : (

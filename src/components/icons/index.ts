@@ -16,6 +16,7 @@ import IconMenu from "./IconMenu";
 import IconCheck from "./IconCheck";
 import IconUnCheck from "./IconUnCheck";
 import IconSearch from "./IconSearch";
+import IconPlayLesson from "./IconPlayLesson";
 
 export {
   IconPlay,
@@ -36,4 +37,5 @@ export {
   IconCheck,
   IconUnCheck,
   IconSearch,
+  IconPlayLesson,
 };

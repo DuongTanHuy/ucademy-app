@@ -80,7 +80,7 @@ export const getCourseBySlug = async (
     const course = await Course.findOne({ slug }).populate({
       path: "lectures",
       model: Lecture,
-      select: "_id title _destroy",
+      select: "_id title order _destroy",
       match: { _destroy: false },
       populate: {
         path: "lessons",
