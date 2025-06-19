@@ -6,7 +6,8 @@ import React from "react";
 
 export default function ActiveLink({ href, children }: TActiveLinkProps) {
   const pathname = usePathname();
-  const isActive = pathname === href;
+
+  const isActive = href === "/" ? pathname === href : pathname.startsWith(href);
 
   return (
     <Link

@@ -4,6 +4,8 @@ import { manrope, roboto, sf_mono } from "@/utils";
 import "./globals.scss";
 import { ThemeProvider } from "@/components/common/theme-provider";
 import { ToastContainer } from "react-toastify";
+import { Toaster } from "sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 export const metadata: Metadata = {
   title: "Ucademy",
@@ -27,14 +29,17 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
-            <ToastContainer
-              autoClose={2000}
-              hideProgressBar
-              pauseOnHover
-              toastClassName="text-sm font-medium p-1 !min-h-10 p-[12px] dark:bg-grayDarker dark:text-gray-300"
-              position="top-right"
-            />
+            <TooltipProvider delayDuration={300}>
+              {children}
+              <ToastContainer
+                autoClose={2000}
+                hideProgressBar
+                pauseOnHover
+                toastClassName="text-sm font-medium p-1 !min-h-10 p-[12px] dark:bg-grayDarker dark:text-gray-300"
+                position="top-right"
+              />
+              <Toaster position="top-right" closeButton />
+            </TooltipProvider>
           </ThemeProvider>
         </body>
       </html>

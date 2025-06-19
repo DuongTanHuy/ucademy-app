@@ -8,7 +8,7 @@ body {
 
 @layer base {
   body {
-    @apply bg-gray-100 dark:bg-grayDarkest antialiased;
+    @apply bg-gray-100 dark:bg-grayDarkest overflow-hidden antialiased;
   }
 
   input[type="number"]::-webkit-inner-spin-button,
@@ -80,4 +80,11 @@ body {
       }
     }
   }
+}
+
+.tox.tox-silver-sink.tox-tinymce-aux {
+  display: none !important;
+}
+.tox-notifications-container {
+  display: none !important;
 }

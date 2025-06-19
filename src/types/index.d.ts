@@ -1,14 +1,15 @@
 import { ICourse } from "@/database/course.model";
+import { ILecture } from "@/database/lecture.model";
 import { ILesson } from "@/database/lesson.model";
 
 type TActiveLinkProps = {
   href: string;
-  children: string | React.ReactNode;
+  children: Readonly<string | React.ReactNode>;
 };
 
 type TMenuItem = {
   href: string;
-  children: string | React.ReactNode;
+  children: Readonly<string | React.ReactNode>;
   icon?: React.ReactNode;
 };
 

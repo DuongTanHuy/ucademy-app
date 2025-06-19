@@ -165,18 +165,16 @@ const CourseUpdate = ({ course }: { course: ICourse }) => {
         status: payload.status,
         level: payload.level,
         info: {
-          requirements: info?.requirements?.filter(
-            (require) => require !== ""
-          ) ?? [""],
-          benefits: info?.benefits?.filter((require) => require !== "") ?? [""],
-          qa: info?.qa?.filter(
-            (qa) => qa.answer !== "" && qa.question !== ""
-          ) ?? [
-            {
-              question: "",
-              answer: "",
-            },
-          ],
+          requirements:
+            payload.info.requirements.length > 0
+              ? payload.info.requirements
+              : [""],
+          benefits:
+            payload.info.benefits.length > 0 ? payload.info.benefits : [""],
+          qa:
+            payload.info.qa.length > 0
+              ? payload.info.qa
+              : [{ question: "", answer: "" }],
         },
       });
 
@@ -211,7 +209,7 @@ const CourseUpdate = ({ course }: { course: ICourse }) => {
                     placeholder="Nhập tên khóa học"
                     className={`${
                       error
-                        ? "border-red-500 dark:border-red-500 !bg-red-200/10"
+                        ? "border-red-500 dark:border-red-700 !bg-red-200/10"
                         : ""
                     }`}
                     {...field}
@@ -233,7 +231,7 @@ const CourseUpdate = ({ course }: { course: ICourse }) => {
                     placeholder="khoa-hoc-lap-trinh"
                     className={`${
                       error
-                        ? "border-red-500 dark:border-red-500 !bg-red-200/10"
+                        ? "border-red-500 dark:border-red-700 !bg-red-200/10"
                         : ""
                     }`}
                     {...field}
@@ -255,7 +253,7 @@ const CourseUpdate = ({ course }: { course: ICourse }) => {
                     placeholder="599.000"
                     className={`${
                       error
-                        ? "border-red-500 dark:border-red-500 !bg-red-200/10"
+                        ? "border-red-500 dark:border-red-700 !bg-red-200/10"
                         : ""
                     }`}
                     {...field}
@@ -280,7 +278,7 @@ const CourseUpdate = ({ course }: { course: ICourse }) => {
                     placeholder="900.000"
                     className={`${
                       error
-                        ? "border-red-500 dark:border-red-500 !bg-red-200/10"
+                        ? "border-red-500 dark:border-red-700 !bg-red-200/10"
                         : ""
                     }`}
                     {...field}
@@ -305,7 +303,7 @@ const CourseUpdate = ({ course }: { course: ICourse }) => {
                     placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
                     className={`${
                       error
-                        ? "border-red-500 dark:border-red-500 !bg-red-200/10"
+                        ? "border-red-500 dark:border-red-700 !bg-red-200/10"
                         : ""
                     }`}
                     {...field}
@@ -352,7 +350,7 @@ const CourseUpdate = ({ course }: { course: ICourse }) => {
                     placeholder="Nhập mô tả"
                     className={`${
                       error
-                        ? "border-red-500 dark:border-red-500 !bg-red-200/10"
+                        ? "border-red-500 dark:border-red-700 !bg-red-200/10"
                         : ""
                     }`}
                     {...field}
@@ -427,7 +425,7 @@ const CourseUpdate = ({ course }: { course: ICourse }) => {
                       });
                     }}
                   >
-                    <IconAdd className="size-5" />
+                    <IconAdd className="size-5 hover:scale-110 transition-all" />
                   </button>
                 </FormLabel>
                 {(field.value ?? []).map((item, index) => (
@@ -470,7 +468,7 @@ const CourseUpdate = ({ course }: { course: ICourse }) => {
                       );
                     }}
                   >
-                    <IconAdd className="size-5" />
+                    <IconAdd className="size-5 hover:scale-110 transition-all" />
                   </button>
                 </FormLabel>
                 {(field.value ?? []).map((item, index) => (
@@ -519,7 +517,7 @@ const CourseUpdate = ({ course }: { course: ICourse }) => {
                       );
                     }}
                   >
-                    <IconAdd className="size-5" />
+                    <IconAdd className="size-5 hover:scale-110 transition-all" />
                   </button>
                 </FormLabel>
                 {(field.value ?? []).map((item, index) => (

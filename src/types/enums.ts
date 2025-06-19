@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 enum UserStatus {
   ACTIVE = "ACTIVE",
   BANDED = "BANDED",

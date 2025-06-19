@@ -6,11 +6,9 @@ import React from "react";
 
 const page = async () => {
   const { userId } = await auth();
-  if (!userId) {
-    return null;
-  }
 
   const mongoUser = await getUserInfo(userId);
+
   if (!mongoUser) {
     return null;
   }

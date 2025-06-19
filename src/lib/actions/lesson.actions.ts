@@ -23,6 +23,7 @@ export const createLesson = async (params: TCreateLesson) => {
 
     findLecture.lessons.push(newLesson._id);
     findLecture.save();
+
     revalidatePath(params.path || "/");
     return {
       success: true,
@@ -57,7 +58,6 @@ export const updateLesson = async (params: TUpdateLesson) => {
     );
 
     revalidatePath(params.path || "");
-
     return {
       success: true,
     };

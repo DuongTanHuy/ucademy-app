@@ -2,7 +2,7 @@
 import { TCreateLecture, TUpdateLecture } from "@/types";
 import { connectDB } from "../mongoose";
 import Course from "@/database/course.model";
-import Lecture, { ILecture } from "@/database/lecture.model";
+import Lecture from "@/database/lecture.model";
 import { revalidatePath } from "next/cache";
 
 export const createLecture = async (params: TCreateLecture) => {

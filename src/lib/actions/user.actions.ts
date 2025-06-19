@@ -6,6 +6,7 @@ import { TCreateUserParams } from "@/types";
 
 export const createUser = async (user: TCreateUserParams) => {
   try {
+    // const cookieStore = await cookies();
     connectDB();
     const newUser = await User.create(user);
     return JSON.parse(JSON.stringify(newUser));

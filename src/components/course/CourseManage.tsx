@@ -21,10 +21,15 @@ import {
 } from "../icons";
 import Link from "next/link";
 import { ICourse } from "@/database/course.model";
-import { updateCourseStatus } from "@/lib/actions/course.actions";
+import { deleteCourse, updateCourseStatus } from "@/lib/actions/course.actions";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import { CourseStatus } from "@/types/enums";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const CourseManage = ({ courses }: { courses: ICourse[] }) => {
   const handleDelete = async (id: string) => {
@@ -39,7 +44,7 @@ const CourseManage = ({ courses }: { courses: ICourse[] }) => {
       cancelButtonText: "Hủy bỏ",
     }).then(async (result: any) => {
       if (result.isConfirmed) {
-        await updateCourseStatus(id, "/manage/course");
+        await deleteCourse(id, "/manage/course");
         // router.refresh();
         toast.success("Xóa khóa học thành công!");
       }
@@ -51,10 +56,10 @@ const CourseManage = ({ courses }: { courses: ICourse[] }) => {
       <Table className="min-w-[600px]">
         <TableHeader>
           <TableRow>
-            <TableHead>Thông tin</TableHead>
-            <TableHead className="text-center">Giá</TableHead>
-            <TableHead className="text-center">Trạng thái</TableHead>
-            <TableHead className="text-center">Hành động</TableHead>
+            <TableHead className="capitalize">Thông tin</TableHead>
+            <TableHead className="capitalize text-center">Giá</TableHead>
+            <TableHead className="capitalize text-center">Trạng thái</TableHead>
+            <TableHead className="capitalize text-center">Hành động</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -97,7 +102,7 @@ const CourseManage = ({ courses }: { courses: ICourse[] }) => {
                       ?.className,
                     `text-nowrap ${
                       course.status === CourseStatus.REJECTED
-                        ? "pointer-events-auto"
+                        ? "pointer-events-auto cursor-pointer hover:scale-110 transition-all"
                         : "pointer-events-none"
                     }`
                   )}
@@ -131,32 +136,63 @@ const CourseManage = ({ courses }: { courses: ICourse[] }) => {
               </TableCell>
               <TableCell className="w-fit">
                 <div className="flex justify-center gap-3">
-                  <Link
-                    href={`/course/${course.slug}`}
-                    className={commonClassNames.action}
-                  >
-                    <IconEye className="size-5" />
-                  </Link>
-                  <Link
-                    href={`/manage/course/update?slug=${course.slug}`}
-                    className={commonClassNames.action}
-                  >
-                    <IconEdit className="size-5" />
-                  </Link>
-                  <Link
-                    href={`/manage/course/update-content?slug=${course.slug}`}
-                    className={commonClassNames.action}
-                  >
-                    <IconExplore className="size-5" />
-                  </Link>
-                  <button
-                    onClick={() => {
-                      handleDelete(course._id);
-                    }}
-                    className={cn(commonClassNames.action, "text-red-500")}
-                  >
-                    <IconDelete className="size-5" />
-                  </button>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Link
+                        href={`/course/${course.slug}`}
+                        className={commonClassNames.action}
+                      >
+                        <IconEye className="size-5" />
+                      </Link>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Xem khóa học</p>
+                    </TooltipContent>
+                  </Tooltip>
+
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Link
+                        href={`/manage/course/update?slug=${course.slug}`}
+                        className={commonClassNames.action}
+                      >
+                        <IconEdit className="size-5" />
+                      </Link>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Cập nhật khóa học</p>
+                    </TooltipContent>
+                  </Tooltip>
+
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Link
+                        href={`/manage/course/update-content?slug=${course.slug}`}
+                        className={commonClassNames.action}
+                      >
+                        <IconExplore className="size-5" />
+                      </Link>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Thêm bài học</p>
+                    </TooltipContent>
+                  </Tooltip>
+
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <button
+                        onClick={() => {
+                          handleDelete(course._id);
+                        }}
+                        className={cn(commonClassNames.action, "text-red-500")}
+                      >
+                        <IconDelete className="size-5" />
+                      </button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Xóa khóa học</p>
+                    </TooltipContent>
+                  </Tooltip>
                 </div>
               </TableCell>
             </TableRow>

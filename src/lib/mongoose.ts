@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 // singleton pattern
 
-const MONGODB_URL = process.env.MONGODB_URL;
+const MONGODB_URL = process.env.MONGODB_URL as string;
 let isConnected: boolean = false;
 
 export const connectDB = async () => {

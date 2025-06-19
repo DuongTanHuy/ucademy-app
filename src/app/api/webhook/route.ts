@@ -45,10 +45,15 @@ export async function POST(req: Request) {
       avatar: image_url as string,
     });
 
-    return NextResponse.json({
-      message: "User created",
-      user,
-    });
+    return NextResponse.json(
+      {
+        message: "User created",
+        user,
+      },
+      {
+        status: 201,
+      }
+    );
   }
 
   // Rest

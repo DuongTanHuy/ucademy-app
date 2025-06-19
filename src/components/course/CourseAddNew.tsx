@@ -14,12 +14,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import slugify from "slugify";
 import { createCourse } from "@/lib/actions/course.actions";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { IUser } from "@/database/user.model";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   title: z
@@ -46,7 +47,6 @@ export default function CourseAddNew({ user }: { user: IUser }) {
     formState: { isSubmitting },
   } = form;
   const watchTitle = watch("title");
-  const watchSlug = watch("slug");
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
@@ -61,7 +61,7 @@ export default function CourseAddNew({ user }: { user: IUser }) {
 
       const response = await createCourse(payload);
 
-      toast.success("Khóa học đã được tạo thành công");
+      toast.success("Khóa học đã được tạo thành công!");
 
       if (response?.slug) {
         route.push(`/manage/course/update?slug=${response.slug}`);
@@ -73,10 +73,10 @@ export default function CourseAddNew({ user }: { user: IUser }) {
   }
 
   useEffect(() => {
-    if (!watchSlug && watchTitle) {
+    if (watchTitle) {
       setValue("slug", slugify(watchTitle, { lower: true, locale: "vi" }));
     }
-  }, [setValue, watchSlug, watchTitle]);
+  }, [setValue, watchTitle]);
 
   return (
     <Form {...form}>
@@ -93,7 +93,7 @@ export default function CourseAddNew({ user }: { user: IUser }) {
                     placeholder="Nhập tên khóa học"
                     className={`${
                       error
-                        ? "border-red-500 dark:border-red-500 !bg-red-200/10"
+                        ? "border-red-500 dark:border-red-700 !bg-red-200/10"
                         : ""
                     }`}
                     {...field}
@@ -114,7 +114,7 @@ export default function CourseAddNew({ user }: { user: IUser }) {
                     placeholder="khoa-hoc-lap-trinh"
                     className={`${
                       error
-                        ? "border-red-500 dark:border-red-500 !bg-red-200/10"
+                        ? "border-red-500 dark:border-red-700 !bg-red-200/10"
                         : ""
                     }`}
                     {...field}

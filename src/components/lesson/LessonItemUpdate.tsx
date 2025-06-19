@@ -101,6 +101,7 @@ const LessonItemUpdate = ({
                 <FormLabel>Thời lượng</FormLabel>
                 <FormControl>
                   <Input
+                    type="number"
                     {...field}
                     onChange={(e) => {
                       field.onChange(Number(e.target.value));

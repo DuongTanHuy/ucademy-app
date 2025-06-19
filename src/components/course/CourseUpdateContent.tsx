@@ -35,7 +35,7 @@ import { ILesson } from "@/database/lesson.model";
 import LessonItemUpdate from "../lesson/LessonItemUpdate";
 
 const CourseUpdateContent = ({ course }: { course: ICourseUpdatePrams }) => {
-  const lectures = course.lectures;
+  const { lectures } = course;
   const [lectureIndex, setLectureIndex] = React.useState(-1);
   const [lessonIndex, setLessonIndex] = React.useState(-1);
 
@@ -114,6 +114,9 @@ const CourseUpdateContent = ({ course }: { course: ICourseUpdatePrams }) => {
       const response = await createLesson({
         course: course._id,
         lecture: lectureId,
+        order:
+          (lectures.find((lec) => lec._id.toString() === lectureId)?.lessons
+            .length ?? 0) + 1,
         title: "Bài học mới",
         slug: `bai-hoc-moi-${new Date().getTime().toString().slice(-3)}`,
         path: `manage/course/update-content?slug=${course.slug}`,
@@ -183,7 +186,7 @@ const CourseUpdateContent = ({ course }: { course: ICourseUpdatePrams }) => {
   };
 
   return (
-    <div>
+    <div className="mt-8">
       {lectures.map((item: ILectureUpdateParams, index) => (
         <div key={index}>
           <Accordion type="single" collapsible className="w-full">
@@ -195,6 +198,9 @@ const CourseUpdateContent = ({ course }: { course: ICourseUpdatePrams }) => {
                       <div
                         className="w-full"
                         onClick={(event) => event.stopPropagation()}
+                        onKeyUp={(event) => {
+                          event.preventDefault();
+                        }}
                       >
                         <Input
                           placeholder="Tên chương"
@@ -275,6 +281,9 @@ const CourseUpdateContent = ({ course }: { course: ICourseUpdatePrams }) => {
                                 <div
                                   className="w-full"
                                   onClick={(event) => event.stopPropagation()}
+                                  onKeyUp={(event) => {
+                                    event.preventDefault();
+                                  }}
                                 >
                                   <Input
                                     placeholder="Tên bài học"

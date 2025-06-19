@@ -6,10 +6,10 @@ import { ICourse } from "@/database/course.model";
 
 const CourseItem = ({ course }: { course?: ICourse }) => {
   return (
-    <div className="bg-white dark:bg-grayDarker dark:border-opacity-10 border border-gray-200 p-4 rounded-2xl">
+    <div className="group bg-white dark:bg-grayDarker dark:border-opacity-10 border border-gray-200 p-4 rounded-2xl">
       <Link
         href={`/course/${course?.slug}`}
-        className="group block h-[180px] relative overflow-hidden rounded-lg"
+        className="block h-[180px] relative overflow-hidden rounded-lg"
       >
         <Image
           src={
@@ -41,7 +41,7 @@ const CourseItem = ({ course }: { course?: ICourse }) => {
         <span className="text-xs px-3 py-1 rounded-full bg-primary bg-opacity-20 text-primary">
           30h25
         </span>
-        <span className="text-sm bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent font-bold">
+        <span className="text-base bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent font-bold">
           {new Intl.NumberFormat("vi-VN", {
             style: "decimal",
             maximumFractionDigits: 0,

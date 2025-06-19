@@ -132,10 +132,11 @@ export const updateCourseStatus = async (
   }
 };
 
-export const deleteCourse = async (courseId: string) => {
+export const deleteCourse = async (courseId: string, path: string = "/") => {
   try {
     connectDB();
     await Course.deleteOne({ _id: courseId });
+    revalidatePath(path);
   } catch (error) {
     console.log(error);
     throw new Error("Failed to delete course");
