@@ -1,3 +1,4 @@
+import { Heading } from "@/components/common";
 import { IconLeft, IconPlayLesson, IconRight } from "@/components/icons";
 import LessonItem from "@/components/lesson/LessonItem";
 import {
@@ -78,7 +79,7 @@ const page = async ({
   }
 
   return (
-    <div className="lg:grid lg:grid-cols-[2fr,1fr] gap-10 min-h-screen">
+    <div className="lg:grid lg:grid-cols-[minmax(0,2fr),minmax(0,1fr)] gap-10 min-h-screen">
       <div>
         <div className="relative aspect-video mb-5 group">
           <iframe
@@ -127,42 +128,66 @@ const page = async ({
             </Link>
           </div>
         </div>
+
+        <Heading hasDecorator={false}>{lessonData.title}</Heading>
+
+        <div className="mt-10 entry-content">
+          <div
+            dangerouslySetInnerHTML={{
+              __html: lessonData.content || "",
+            }}
+          />
+        </div>
       </div>
 
-      <div>
-        {course.lectures.map((item: ILectureUpdateParams, index: number) => (
-          <Accordion
-            key={index}
-            type="single"
-            collapsible
-            className="w-full"
-            defaultValue={lecture}
+      <div className="-mr-3">
+        <div className="sticky top-0 left-0 right-0 max-h-[calc(100vh-100px)] overflow-auto pr-1">
+          <div
+            className="h-4 w-full rounded-full border borderDarkMode bgDarkMode mb-5 relative"
+           
           >
-            <AccordionItem value={item._id.toString()}>
-              <AccordionTrigger>
-                <div>{`Chương ${index + 1}: ${item.title}`}</div>
-              </AccordionTrigger>
-              {item.lessons.length > 0 ? (
-                item.lessons.map((lesson, lessonIndex) => (
-                  <LessonItem
-                    key={lessonIndex}
-                    courseSlug={course.slug}
-                    lectureSlug={item._id.toString()}
-                    lessonSlug={lesson.slug}
-                    lessonDuration={lesson.duration}
-                    lessonTitle={lesson.title}
-                    active={lesson.slug === lessonSlug}
-                    icon={<IconPlayLesson className="size-5" />}
-                  />
-                ))
-              ) : (
-                <AccordionContent className="!bg-transparent border-none py-1 px-3">
-                  <p className="text-gray-400 italic">Chưa có bài học nào</p>
-                </AccordionContent>
-              )}
-            </AccordionItem>
-          </Accordion>
-        ))}
+            <div className="absolute rounded-full top-0 bottom-0 left-0 right-1/2 bg-gradient-to-r from-secondary/50 dark:from-secondary to-[#9d8189]/40 dark:to-[#9d8189]" />
+          </div>
+
+          {course.lectures.map((item: ILectureUpdateParams, index: number) => (
+            <Accordion
+              key={index}
+              type="single"
+              collapsible
+              className="w-full"
+              defaultValue={lecture}
+            >
+              <AccordionItem value={item._id.toString()}>
+                <AccordionTrigger className="w-full">
+                  <div className="line-clamp-1">{`Chương ${index + 1}: ${
+                    item.title
+                  }`}</div>
+                </AccordionTrigger>
+                {item.lessons.length > 0 ? (
+                  item.lessons.map((lesson, lessonIndex) => (
+                    <LessonItem
+                      key={lessonIndex}
+                      courseSlug={course.slug}
+                      lectureSlug={item._id.toString()}
+                      lessonSlug={lesson.slug}
+                      lessonDuration={lesson.duration}
+                      lessonTitle={lesson.title}
+                      active={
+                        lesson.slug === lessonSlug &&
+                        lecture === item._id.toString()
+                      }
+                      icon={<IconPlayLesson className="size-5 flex-shrink-0" />}
+                    />
+                  ))
+                ) : (
+                  <AccordionContent className="!bg-transparent border-none py-1 px-3">
+                    <p className="text-gray-400 italic">Chưa có bài học nào</p>
+                  </AccordionContent>
+                )}
+              </AccordionItem>
+            </Accordion>
+          ))}
+        </div>
       </div>
     </div>
   );

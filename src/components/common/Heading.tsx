@@ -4,9 +4,11 @@ import React from "react";
 const Heading = ({
   children,
   className,
+  hasDecorator = true,
 }: {
   children: React.ReactNode;
   className?: string;
+  hasDecorator?: boolean;
 }) => {
   return (
     <div className="w-fit">
@@ -18,7 +20,9 @@ const Heading = ({
       >
         {children}
       </h1>
-      <div className="w-full h-1 mt-2 rounded-sm bg-gradient-to-r from-secondary/50 dark:from-secondary to-[#9d8189]/40 dark:to-[#9d8189]" />
+      {hasDecorator && (
+        <div className="w-full h-1 mt-2 rounded-sm bg-gradient-to-r from-secondary/50 dark:from-secondary to-[#9d8189]/40 dark:to-[#9d8189]" />
+      )}
     </div>
   );
 };

@@ -35,9 +35,9 @@ const LessonItem = ({
         router.push(`/course/${courseSlug}/${lectureSlug}?slug=${lessonSlug}`)
       }
     >
-      {icon ?? <IconPlay className="size-4" />}
-      <h4>{lessonTitle}</h4>
-      <span className="ml-auto text-xs font-semibold">
+      {icon ?? <IconPlay className="size-4 flex-shrink-0" />}
+      <h4 className="line-clamp-1">{lessonTitle}</h4>
+      <span className="ml-auto text-xs font-semibold whitespace-nowrap">
         {lessonDuration} phút
       </span>
     </AccordionContent>

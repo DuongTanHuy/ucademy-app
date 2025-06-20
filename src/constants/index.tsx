@@ -113,8 +113,10 @@ export const commonClassNames = {
 
 export const editorOptions = (field: any, theme: any) => ({
   initialValue: "",
-  onBlur: field.onBlur,
-  onEditorChange: (content: any) => field.onChange(content),
+  ...(field && {
+    onBlur: field.onBlur,
+    onEditorChange: (content: any) => field.onChange(content),
+  }),
   init: {
     codesample_global_prismjs: true,
     skin: theme === "dark" ? "oxide-dark" : "oxide",

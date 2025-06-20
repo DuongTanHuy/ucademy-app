@@ -200,3 +200,8 @@ const findCourse = await Course.findOne({ slug }).populate({
 - 7. Nếu thiếu file môi trường thì copy .env.local hết và dán vào mục `Settings -> Enviroment variables`
 - 8. Chọn deployment khi nãy và chọn `Redeploy` lưu ý nhớ tích vào `Using existing build cache`
 - 9. Nếu gặp khó khăn thì hỏi lên nhóm mình sẽ support
+
+
+- sticky chi co tac dung khi co the cha o ngoai co height bang voi chieu chao cua scroll
+
+- line-clamp-1: style so dong cua text khi noi dung vuot qua chieu dai cua element chua no, neu dai hon thi thay bang ...

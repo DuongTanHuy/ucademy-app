@@ -2,8 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  scrollbar-color: rgb(156 163 175 / 1) transparent;
+.add-new-element-variable:not(:last-child) {
+  display: none;
+}
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-clip: content-box;
+  background-color: rgba(100, 112, 125, 0.5);
+  opacity: 50%;
+  border-radius: 4px;
 }
 
 @layer base {
@@ -87,4 +106,34 @@ body {
 }
 .tox-notifications-container {
   display: none !important;
+}
+
+.entry-content {
+  font-size: 16px;
+  line-height: 2;
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  ul,
+  ol,
+  li {
+    @apply mb-5;
+  }
+  ol {
+    list-style: decimal;
+  }
+  ul {
+    list-style: disc;
+  }
+  ol,
+  ul {
+    @apply pl-10;
+  }
+  a {
+    @apply underline text-primary font-medium;
+  }
 }

@@ -33,7 +33,7 @@ const CourseItem = ({ course }: { course?: ICourse }) => {
           "Khóa học NextJs Pro - Xây dựng E-Learning system hoàn chỉnh"}
       </h3>
 
-      <p className="text-sm text-gray-500 dark:text-grayDark mt-1">
+      <p className="text-sm text-gray-500 dark:text-grayDark mt-1 line-clamp-3">
         {course?.desc}
       </p>
 

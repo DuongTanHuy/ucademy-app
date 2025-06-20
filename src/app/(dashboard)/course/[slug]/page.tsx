@@ -88,7 +88,9 @@ const page = async ({ params }: { params: { slug: string } }) => {
             <Accordion key={index} type="single" collapsible className="w-full">
               <AccordionItem value="item-1">
                 <AccordionTrigger>
-                  <div>{`Chương ${index + 1}: ${item.title}`}</div>
+                  <div className="line-clamp-1">{`Chương ${index + 1}: ${
+                    item.title
+                  }`}</div>
                 </AccordionTrigger>
                 {item.lessons.length > 0 ? (
                   item.lessons.map((lesson, lessonIndex) => (
