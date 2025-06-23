@@ -8,8 +8,13 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { commonClassNames } from "@/constants";
+import { IHistory } from "@/database/history.model";
 import { getCourseBySlug } from "@/lib/actions/course.actions";
+import { getHistoryByUserAndCourse } from "@/lib/actions/history.actions";
+import { getUserInfo } from "@/lib/actions/user.actions";
 import { ILectureUpdateParams } from "@/types";
+import { UserRole } from "@/types/enums";
+import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import React from "react";
@@ -26,9 +31,30 @@ const page = async ({
     slug: string;
   };
 }) => {
+  const { userId }: { userId: string | null } = await auth();
+
+  if (!userId) {
+    return notFound();
+  }
+
+  const user = await getUserInfo(userId);
+
+  if (!user) {
+    return notFound();
+  }
+
   const course = await getCourseBySlug(courseSlug);
 
   if (!course || !course.lectures) {
+    return notFound();
+  }
+
+  if (
+    !user?.courses.some(
+      (userCourse) => userCourse.toString() === course._id.toString()
+    ) &&
+    user?.role !== UserRole.ADMIN
+  ) {
     return notFound();
   }
 
@@ -47,6 +73,20 @@ const page = async ({
   if (!lessonData) {
     return notFound();
   }
+
+  const historyData = await getHistoryByUserAndCourse({
+    user: userId || "",
+    course: course._id.toString(),
+  });
+
+  const totalLessons = course.lectures.reduce(
+    (total, lecture) => total + lecture.lessons.length,
+    0
+  );
+
+  const completedPercent = Math.round(
+    (historyData.length / totalLessons) * 100
+  );
 
   let prevLessonData = lectureData.lessons.find(
     (less) => less.order === lessonData.order - 1
@@ -142,11 +182,13 @@ const page = async ({
 
       <div className="-mr-3">
         <div className="sticky top-0 left-0 right-0 max-h-[calc(100vh-100px)] overflow-auto pr-1">
-          <div
-            className="h-4 w-full rounded-full border borderDarkMode bgDarkMode mb-5 relative"
-           
-          >
-            <div className="absolute rounded-full top-0 bottom-0 left-0 right-1/2 bg-gradient-to-r from-secondary/50 dark:from-secondary to-[#9d8189]/40 dark:to-[#9d8189]" />
+          <div className="h-3 w-full rounded-full border borderDarkMode bgDarkMode mb-5 relative">
+            <div
+              className="absolute rounded-full top-0 bottom-0 left-0 bg-gradient-to-r from-secondary/50 dark:from-secondary to-[#9d8189]/40 dark:to-[#9d8189] transition-all"
+              style={{
+                right: `${100 - completedPercent}%`,
+              }}
+            />
           </div>
 
           {course.lectures.map((item: ILectureUpdateParams, index: number) => (
@@ -164,9 +206,18 @@ const page = async ({
                   }`}</div>
                 </AccordionTrigger>
                 {item.lessons.length > 0 ? (
-                  item.lessons.map((lesson, lessonIndex) => (
+                  item.lessons.map((lesson) => (
                     <LessonItem
-                      key={lessonIndex}
+                      key={lesson._id.toString()}
+                      courseId={course._id.toString()}
+                      lessonId={lesson._id.toString()}
+                      historyId={
+                        historyData.find(
+                          (his: IHistory) =>
+                            his.lesson.toString() === lesson._id.toString()
+                        )?._id || ""
+                      }
+                      userId={userId || ""}
                       courseSlug={course.slug}
                       lectureSlug={item._id.toString()}
                       lessonSlug={lesson.slug}
@@ -177,6 +228,10 @@ const page = async ({
                         lecture === item._id.toString()
                       }
                       icon={<IconPlayLesson className="size-5 flex-shrink-0" />}
+                      checked={historyData.some(
+                        (his: IHistory) =>
+                          his.lesson.toString() === lesson._id.toString()
+                      )}
                     />
                   ))
                 ) : (

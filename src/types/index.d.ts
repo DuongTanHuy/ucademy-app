@@ -86,6 +86,12 @@ type TCreateLesson = {
   slug?: string;
 };
 
+type TCreateHistoryParams = {
+  user: string;
+  course: string;
+  lesson: string;
+};
+
 export {
   TActiveLinkProps,
   TMenuItem,
@@ -98,4 +104,5 @@ export {
   ICourseUpdatePrams,
   ILectureUpdateParams,
   TCreateLesson,
+  TCreateHistoryParams,
 };
