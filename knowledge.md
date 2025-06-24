@@ -205,3 +205,5 @@ const findCourse = await Course.findOne({ slug }).populate({
 - sticky chi co tac dung khi co the cha o ngoai co height bang voi chieu chao cua scroll
 
 - line-clamp-1: style so dong cua text khi noi dung vuot qua chieu dai cua element chua no, neu dai hon thi thay bang ...
+
+- de ap dung duoc mt-auto (...-auto) cho mot phan tu con bat ky thi the cha phai co display la flex va flex-1 (tuy chon)

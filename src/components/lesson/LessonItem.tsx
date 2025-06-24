@@ -65,7 +65,7 @@ const LessonItem = ({
         router.push(`/course/${courseSlug}/${lectureSlug}?slug=${lessonSlug}`)
       }
     >
-      {checked !== undefined && (
+      {typeof checked !== "undefined" && (
         <Checkbox
           className="flex-shrink-0 text-white"
           checked={checked}

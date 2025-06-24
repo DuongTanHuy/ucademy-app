@@ -34,3 +34,20 @@ export const getUserInfo = async (
     throw new Error("Failed to get user info");
   }
 };
+
+export const getUserCourses = async (userId: string | null) => {
+  try {
+    if (!userId) {
+      return [];
+    }
+    connectDB();
+    const userCourse = await User.findOne({ clerkId: userId }).populate(
+      "courses"
+    );
+
+    return JSON.parse(JSON.stringify(userCourse?.courses)) || [];
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to get user courses");
+  }
+};

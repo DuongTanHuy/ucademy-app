@@ -4,9 +4,17 @@ import React from "react";
 import { IconEye, IconStar } from "../icons";
 import { ICourse } from "@/database/course.model";
 
-const CourseItem = ({ course }: { course?: ICourse }) => {
+const CourseItem = ({
+  course,
+  buttonTitle,
+  url,
+}: {
+  course: ICourse;
+  buttonTitle?: string;
+  url?: string;
+}) => {
   return (
-    <div className="group bg-white dark:bg-grayDarker dark:border-opacity-10 border border-gray-200 p-4 rounded-2xl">
+    <div className="group bg-white dark:bg-grayDarker dark:border-opacity-10 border border-gray-200 p-4 rounded-2xl flex flex-col">
       <Link
         href={`/course/${course?.slug}`}
         className="block h-[180px] relative overflow-hidden rounded-lg"
@@ -33,11 +41,11 @@ const CourseItem = ({ course }: { course?: ICourse }) => {
           "Khóa học NextJs Pro - Xây dựng E-Learning system hoàn chỉnh"}
       </h3>
 
-      <p className="text-sm text-gray-500 dark:text-grayDark mt-1 line-clamp-3">
+      <p className="text-sm text-gray-500 dark:text-grayDark mt-1 mb-4 line-clamp-3">
         {course?.desc}
       </p>
 
-      <div className="flex items-center justify-between mt-4">
+      <div className="flex items-center justify-between mt-auto">
         <span className="text-xs px-3 py-1 rounded-full bg-primary bg-opacity-20 text-primary">
           30h25
         </span>
@@ -63,9 +71,9 @@ const CourseItem = ({ course }: { course?: ICourse }) => {
         </div>
       </div>
 
-      <Link href={`/course/${course?.slug}`}>
+      <Link href={url ?? `/course/${course?.slug}`}>
         <button className="group relative bg-primary hover:bg-opacity-80 text-white font-semibold py-2 rounded-lg transition duration-200 w-full overflow-hidden mt-2">
-          <span className="relative z-10">Xem khóa học</span>
+          <span className="relative z-10">{buttonTitle || "Xem chi tiết"}</span>
           <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full group-hover:duration-[850ms] duration-[850ms] ease-in-out transition-transform bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
         </button>
       </Link>

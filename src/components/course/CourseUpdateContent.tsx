@@ -370,7 +370,7 @@ const CourseUpdateContent = ({ course }: { course: ICourseUpdatePrams }) => {
 
           <Button
             variant="outline"
-            className="my-3 ml-auto w-fit flex flex-row gap-2 items-center"
+            className="my-3 ml-auto w-fit flex flex-row gap-2 items-center button-primary"
             onClick={() => handleAddNewLesson(item._id)}
           >
             <IconAdd />
@@ -379,7 +379,7 @@ const CourseUpdateContent = ({ course }: { course: ICourseUpdatePrams }) => {
         </div>
       ))}
 
-      <Button onClick={handleAddNewLecture} className="mt-5">
+      <Button onClick={handleAddNewLecture} className="mt-5 button-primary">
         Thêm chương mới
       </Button>
     </div>

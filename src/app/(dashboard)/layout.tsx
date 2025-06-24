@@ -38,14 +38,14 @@ export default function layout({
           <SignedOut>
             <SignInButton mode="modal">
               <button className="group relative bg-primary hover:bg-opacity-80 text-white font-semibold py-2 px-4 rounded-lg transition duration-200 min-w-fit overflow-hidden">
-                <span className="relative z-10">Sign In</span>
-                <div className="absolute inset-0 -translate-x-full :translate-x-full group-hover:duration-[850ms] duration-[850ms] ease-in-out transition-transform bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+                <span className="relative z-10">Đăng nhập</span>
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full group-hover:duration-[850ms] duration-[850ms] ease-in-out transition-transform bg-gradient-to-r from-transparent via-white/10 to-transparent"/>
               </button>
             </SignInButton>
             <SignUpButton mode="modal">
               <button className="group relative bg-white dark:bg-opacity-0 hover:bg-opacity-80 text-primary font-semibold py-2 px-4 rounded-lg border border-primary transition duration-200 min-w-fit overflow-hidden">
-                <span className="relative z-10">Sign Up</span>
-                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full group-hover:duration-[850ms] duration-[850ms] ease-in-out transition-transform bg-gradient-to-r from-transparent via-primary/10 to-transparent"></div>
+                <span className="relative z-10">Đăng ký</span>
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full group-hover:duration-[850ms] duration-[850ms] ease-in-out transition-transform bg-gradient-to-r from-transparent via-primary/10 to-transparent"/>
               </button>
             </SignUpButton>
           </SignedOut>
