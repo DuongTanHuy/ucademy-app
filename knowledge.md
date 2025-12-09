@@ -207,3 +207,5 @@ const findCourse = await Course.findOne({ slug }).populate({
 - line-clamp-1: style so dong cua text khi noi dung vuot qua chieu dai cua element chua no, neu dai hon thi thay bang ...
 
 - de ap dung duoc mt-auto (...-auto) cho mot phan tu con bat ky thi the cha phai co display la flex va flex-1 (tuy chon)
+
+- doi voi logic hover vao 1 element de hien thi popoup thi nen style border cho mac tiep suc voi element la: 8px solid transparent, nham tao cam giac khoang cach nhu thuc te la giu element va popup khong co khoan cach, dieu nay giup van giu duoc su kien hover vao element khi chuot di vao popup
